@@ -1,0 +1,51 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.custom-input {
+  border: 1px solid;
+  background-color: white;
+  outline: none; /* Remove default focus outline */
+}
+
+.custom-input:focus {
+  border-color: hsl(169, 82%, 27%); /* Ensure border color stays green on focus */
+}
+
+
+.checkbox {
+  width: 14px; /* Adjust the size as needed */
+  height: 14px; /* Adjust the size as needed */
+  border-radius: 0; /* Ensure edges are not rounded */
+  appearance: none; /* Remove default checkbox styling */
+  border: 1px solid #d1d5db; /* Border color */
+  background-color: white; /* Background color */
+}
+
+.checkbox:checked {
+  background-image: url('./assets/images/icon-checkbox-check.svg'); /* Path to your SVG */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-color: green; /* Optional: Change border color when checked */
+}
+
+.radio {
+  width: 14px; /* Adjust the size as needed */
+  height: 14px; /* Adjust the size as needed */
+  border-radius: 0; /* Ensure edges are not rounded */
+  border: 1px solid #d1d5db; 
+  appearance: none; 
+}
+
+.radio:checked {
+  background-image: url('./assets/images/icon-radio-selected.svg'); /* Path to your SVG */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
