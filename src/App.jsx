@@ -1,5 +1,7 @@
 import "./App.css";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -12,6 +14,13 @@ function App() {
     terms: false,
   });
   const [errors, setErrors] = useState({});
+
+  const Msg = ({ closeToast, toastProps }) => (
+    <div className="font-karla">
+      <h1 className="text-white text-lg font-bold text-left"> Message Sent!</h1> 
+      <p className="text-sm text-left"> Thanks for completing the form. We'll be in touch soon!</p>
+    </div>
+  );
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -51,14 +60,15 @@ function App() {
     if (Object.keys(newErrors).length > 0) {
       return;
     }
-    alert("Form submitted successfully");
+    
+    toast(<Msg/>);
   }
 
   return (
     <>
-      <div className="flex flex-col justify-start items-center min-h-screen">
-        <div className="bg-white  w-full max-w-screen-sm  rounded-lg p-5">
-          <h1 className="text-2xl font-bold text-black text-left mb-5">
+      <div className="flex flex-col justify-start items-center min-h-screen mt-10">
+        <div className="bg-white  w-full max-w-lg  rounded-lg p-5">
+          <h1 className="text-2xl font-bold text-black text-left mb-5 ">
             Contact Us
           </h1>
           <form className="">
@@ -66,7 +76,7 @@ function App() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col">
                   <label htmlFor="firstName" className=" text-left text-sm">
-                   First Name
+                   First Name <span className="text-primary-green600">*</span>
                    
                   </label>
                   <input
@@ -96,7 +106,7 @@ function App() {
               <div className="w-full flex flex-col">
                 <label htmlFor="email" className=" text-left text-sm">
                   {" "}
-                  Email <span className="text-primary-green600">*</span>
+                  Email Address <span className="text-primary-green600">*</span>
                 </label>
                 <input
                   type="text"
@@ -180,9 +190,21 @@ function App() {
               { errors.terms && <p className="text-primary-red text-sm text-left mt-2">To submit this form, please consent to being contacted</p>}
 
               <div className="btn">
-                <button className="bg-primary-green600 text-white rounded-lg w-full h-10" onClick={handleSubmit}>
+                <button className="bg-primary-green600 text-white rounded-lg w-full h-10 hover:bg-green-900" onClick={handleSubmit}>
                   Submit
                 </button>
+                  <ToastContainer
+                  position="top-center"
+                  autoClose={5000}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable={false}
+                  pauseOnHover
+                  theme="dark"
+                  />
               </div>
 
             </div>
