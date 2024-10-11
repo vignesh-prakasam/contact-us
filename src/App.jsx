@@ -1,6 +1,59 @@
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    queryType: "",
+    message: "",
+    terms: false,
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let newErrors = {};
+    if (!formData.firstName) {
+      newErrors.firstName = true;
+    }
+    if (!formData.lastName) {
+      newErrors.lastName = true;
+    }
+    if (!formData.terms) {
+      newErrors.terms = true;
+    }
+    if (!formData.message) {
+      newErrors.message = true;
+    }
+    if(!formData.email) {
+      newErrors.email = true;
+    }
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.emailFormat = true
+    }
+
+    if(!formData.queryType) {
+      newErrors.queryType = true;
+    }
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
+    alert("Form submitted successfully");
+  }
+
   return (
     <>
       <div className="flex flex-col justify-start items-center min-h-screen">
@@ -13,26 +66,31 @@ function App() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col">
                   <label htmlFor="firstName" className=" text-left text-sm">
-                    {" "}
-                    First Name <span className="text-primary-green600">*</span>
+                   First Name
+                   
                   </label>
                   <input
                     type="text"
                     name="firstName"
-                    className="p-2 outline-none rounded-lg h-10  border-gray-300 custom-input"
-                  />
+                    className={`p-2 outline-none rounded-lg h-10 border-gray-300 custom-input ${errors.firstName ? "border-primary-red" : ""}`}
+                    onChange={handleChange}
+                />
+                { errors.firstName && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
                 </div>
+                
                 <div className="flex flex-col">
                   <label htmlFor="lastName" className=" text-left text-sm">
-                    {" "}
                     Last Name <span className="text-primary-green600">*</span>
                   </label>
                   <input
                     type="text"
                     name="lastName"
-                    className="p-2 outline-none rounded-lg h-10  border-gray-300 custom-input"
+                    className={`p-2 outline-none rounded-lg h-10  border-gray-300 custom-input ${errors.lastName ? "border-primary-red" : ""}`}
+                    onChange={handleChange}
                   />
+                  { errors.lastName && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
                 </div>
+                
               </div>
 
               <div className="w-full flex flex-col">
@@ -43,9 +101,13 @@ function App() {
                 <input
                   type="text"
                   name="email"
-                  className="p-2 outline-none rounded-lg h-10  border-gray-300 custom-input"
+                  className={`p-2 outline-none rounded-lg h-10  border-gray-300 custom-input ${errors.email ? "border-primary-red" : ""}`}
+                  onChange={handleChange}
                 />
+                { errors.email && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
+                { errors.emailFormat && <p className="text-primary-red text-sm text-left mt-2">Please enter a valid email address</p>}
               </div>
+              
 
               {/* radio buttons */}
               <div className="grid grid-cols-2 gap-4">
@@ -53,7 +115,7 @@ function App() {
                   <label htmlFor="queryType1" className=" text-left text-sm">
                     Query Type <span className="text-primary-green600">*</span>
                   </label>
-                  <div className=" flex flex-row justify-start px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10 ">
+                  <div className=" flex flex-row justify-start px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10 group focus-within:bg-primary-green200">
                     <input
                       type="radio"
                       name="queryType"
@@ -61,14 +123,16 @@ function App() {
                       id="generalEnquiry"
                       tabIndex="0"
                       className="radio rounded-full"
+                      onChange={handleChange}
                     />
                     <label htmlFor="generalEnquiry" className=" text-left text-sm">
                       General Enquiry
                     </label>
                   </div>
+                  
                 </div>
                 <div className="flex flex-col">
-                  <div className=" flex flex-row justify-start mt-5 px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10 ">
+                  <div className=" flex flex-row justify-start mt-5 px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10 group focus-within:bg-primary-green200">
                     <input
                       type="radio"
                       name="queryType"
@@ -76,13 +140,16 @@ function App() {
                       tabIndex="0"
                       id="supportRequest"
                       className="radio rounded-full"
+                      onChange={handleChange}
                     />
                     <label htmlFor="supportRequest" className=" text-left text-sm">
                       Support Request
                     </label>
                   </div>
                 </div>
+                { errors.queryType && <p className="text-primary-red text-sm text-left">Please select a query type</p>}
               </div>
+              
 
               <div className="w-full flex flex-col">
                 <label htmlFor="message" className=" text-left text-sm">
@@ -91,8 +158,10 @@ function App() {
                 </label>
                 <textarea
                   name="message"
-                  className="p-2 outline-none rounded-lg h-20  border-gray-300 custom-input"
+                  className={`p-2 outline-none rounded-lg h-20  border-gray-300 custom-input ${errors.message ? "border-primary-red" : ""}`}
+                  onChange={handleChange}
                 ></textarea>
+                { errors.message && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
               </div>
 
               <div className="w-full flex flex-row items-center">
@@ -102,14 +171,16 @@ function App() {
                   className="checkbox"
                   id="terms"
                   tabIndex="0"
+                  onChange={handleChange}
                 />
                 <label htmlFor="terms" className="pl-5 text-left text-sm">
                   I consent to being contacted by the team <span className="text-primary-green600">*</span>
                 </label>
               </div>
+              { errors.terms && <p className="text-primary-red text-sm text-left mt-2">To submit this form, please consent to being contacted</p>}
 
               <div className="btn">
-                <button className="bg-primary-green600 text-white rounded-lg w-full h-10">
+                <button className="bg-primary-green600 text-white rounded-lg w-full h-10" onClick={handleSubmit}>
                   Submit
                 </button>
               </div>
