@@ -67,35 +67,35 @@ function App() {
   return (
     <>
       <div className="flex flex-col justify-start items-center min-h-screen mt-10">
-        <div className="bg-white  w-full max-w-lg  rounded-lg p-5">
+        <div className="bg-white  w-full max-w-2xl  rounded-lg p-5">
           <h1 className="text-2xl font-bold text-black text-left mb-5 ">
             Contact Us
           </h1>
           <form className="">
             <div className="space-y-5">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid sm:grid-cols-2 grid-cols-1 gap-4">
                 <div className="flex flex-col">
-                  <label htmlFor="firstName" className=" text-left text-sm">
+                  <label htmlFor="firstName" className=" text-left text-sm mb-1">
                    First Name <span className="text-primary-green600">*</span>
                    
                   </label>
                   <input
                     type="text"
                     name="firstName"
-                    className={`p-2 outline-none rounded-lg h-10 border-gray-300 custom-input ${errors.firstName ? "border-primary-red" : ""}`}
+                    className={`p-2 outline-none rounded-lg h-10   border-gray-300 custom-input ${errors.firstName ? "border-primary-red" : ""}`}
                     onChange={handleChange}
                 />
                 { errors.firstName && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
                 </div>
                 
                 <div className="flex flex-col">
-                  <label htmlFor="lastName" className=" text-left text-sm">
+                  <label htmlFor="lastName" className=" text-left text-sm mb-1">
                     Last Name <span className="text-primary-green600">*</span>
                   </label>
                   <input
                     type="text"
                     name="lastName"
-                    className={`p-2 outline-none rounded-lg h-10  border-gray-300 custom-input ${errors.lastName ? "border-primary-red" : ""}`}
+                    className={`p-2 outline-none rounded-lg h-10    border-gray-300 custom-input ${errors.lastName ? "border-primary-red" : ""}`}
                     onChange={handleChange}
                   />
                   { errors.lastName && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
@@ -104,14 +104,14 @@ function App() {
               </div>
 
               <div className="w-full flex flex-col">
-                <label htmlFor="email" className=" text-left text-sm">
+                <label htmlFor="email" className=" text-left text-sm mb-1">
                   {" "}
                   Email Address <span className="text-primary-green600">*</span>
                 </label>
                 <input
                   type="text"
                   name="email"
-                  className={`p-2 outline-none rounded-lg h-10  border-gray-300 custom-input ${errors.email ? "border-primary-red" : ""}`}
+                  className={`p-2 outline-none rounded-lg h-10    border-gray-300 custom-input ${errors.email ? "border-primary-red" : ""}`}
                   onChange={handleChange}
                 />
                 { errors.email && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
@@ -120,12 +120,12 @@ function App() {
               
 
               {/* radio buttons */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-4">
                 <div className="flex flex-col">
-                  <label htmlFor="queryType1" className=" text-left text-sm">
+                  <label htmlFor="queryType1" className=" text-left text-sm mb-1">
                     Query Type <span className="text-primary-green600">*</span>
                   </label>
-                  <div className=" flex flex-row justify-start px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10 group focus-within:bg-primary-green200">
+                  <div className=" flex flex-row justify-start px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10   group focus-within:bg-primary-green200">
                     <input
                       type="radio"
                       name="queryType"
@@ -142,7 +142,7 @@ function App() {
                   
                 </div>
                 <div className="flex flex-col">
-                  <div className=" flex flex-row justify-start mt-5 px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10 group focus-within:bg-primary-green200">
+                  <div className=" flex flex-row justify-start mt-5 px-7 space-x-3 items-center w-full custom-input rounded-md border-gray-300 h-10  group focus-within:bg-primary-green200">
                     <input
                       type="radio"
                       name="queryType"
@@ -162,13 +162,13 @@ function App() {
               
 
               <div className="w-full flex flex-col">
-                <label htmlFor="message" className=" text-left text-sm">
+                <label htmlFor="message" className=" text-left text-sm mb-1">
                   {" "}
                   Message <span className="text-primary-green600">*</span>
                 </label>
                 <textarea
                   name="message"
-                  className={`p-2 outline-none rounded-lg h-20  border-gray-300 custom-input ${errors.message ? "border-primary-red" : ""}`}
+                  className={`p-2 outline-none rounded-lg sm:h-20 h-40 border-gray-300 custom-input ${errors.message ? "border-primary-red" : ""}`}
                   onChange={handleChange}
                 ></textarea>
                 { errors.message && <p className="text-primary-red text-sm text-left mt-2">This field is required</p>}
@@ -190,7 +190,7 @@ function App() {
               { errors.terms && <p className="text-primary-red text-sm text-left mt-2">To submit this form, please consent to being contacted</p>}
 
               <div className="btn">
-                <button className="bg-primary-green600 text-white rounded-lg w-full h-10 hover:bg-green-900" onClick={handleSubmit}>
+                <button className="bg-primary-green600 text-white rounded-lg w-full h-10   hover:bg-green-900" tabIndex="0" onClick={handleSubmit}>
                   Submit
                 </button>
                   <ToastContainer
